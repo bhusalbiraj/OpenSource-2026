@@ -36,7 +36,7 @@ export default function Footer() {
         <div className="row">
           <div className="col-md-12">
             <p>
-              <i className="fa fa-copyright"></i> 2024 PDSC Nepal. All Rights
+              <i className="fa fa-copyright"></i> 2026 PDSC Nepal. All Rights
               Reserved.
             </p>
           </div>
