@@ -30,11 +30,18 @@ const scrollToSection = (sectionDataAttribute:string) => {
 };
 
 function App({moveToSection}:{moveToSection:string}) {
-  useEffect(()=>{
-    window.onload = () => {
+  useEffect(() => {
+    const handleLoad = () => {
       scrollToSection(moveToSection);
-    }
-  },[])
+    };
+
+    window.addEventListener('load', handleLoad);
+    handleLoad();
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, [moveToSection]);
   return (
     <>
       <Navbar />

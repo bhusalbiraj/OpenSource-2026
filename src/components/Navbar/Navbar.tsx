@@ -10,28 +10,24 @@ export default function Navbar() {
   const locator = useLocation();
 
   useEffect(() => {
-    if(window.innerWidth > 950 && changed === true){
-    setIsActive(true);
-    setChanged(false);
-    }
-    if(window.innerWidth < 950 && changed === false){
-      setIsActive(false);
-      setChanged(true);
-    }
-  },[])
+    const syncMenuState = () => {
+      if(window.innerWidth > 950 && changed === true){
+        setIsActive(true);
+        setChanged(false);
+      }
+      if(window.innerWidth < 950 && changed === false){
+        setIsActive(false);
+        setChanged(true);
+      }
+    };
 
-  window.addEventListener('resize', () => {
-    if(window.innerWidth > 950 && changed === true){
-      setIsActive(true);
-      setChanged(false);
-    }
-    if(window.innerWidth < 950 && changed === false){
-      setIsActive(false);
-      setChanged(true);
-    }
-  })
-  
-  
+    syncMenuState();
+    window.addEventListener('resize', syncMenuState);
+
+    return () => {
+      window.removeEventListener('resize', syncMenuState);
+    };
+  }, [changed])
 
 const scrollToSection = (sectionDataAttribute:string) => {
   if (locator.pathname !== '/') {
